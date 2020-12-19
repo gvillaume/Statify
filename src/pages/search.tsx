@@ -20,6 +20,7 @@ import {
     ChevronRightIcon,
     ExternalLinkIcon,
 } from '@chakra-ui/icons'
+import ml5 from 'ml5'
 
 import { get } from '../utils/api/functions'
 import Layout from '../components/shared/layout'
@@ -37,8 +38,6 @@ const Search: React.FC = () => {
             <Heading size="lg">Search a track evaluate it</Heading>
         </Box>
     )
-
-    const ml5 = require('ml5')
 
     React.useEffect(() => {
         dataContext.updateTracks()
