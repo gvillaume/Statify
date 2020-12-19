@@ -1,9 +1,10 @@
-import React from "react"
-import axios from "axios"
-import qs from "qs"
-import { navigate } from "gatsby"
+import React from 'react'
+import axios from 'axios'
+import qs from 'qs'
+import { navigate } from 'gatsby'
+import { window } from 'browser-monads'
 
-import { getParamValues } from "../utils/api/functions"
+import { getParamValues } from '../utils/api/functions'
 
 const Redirect: React.FC = () => {
     React.useEffect(() => {
@@ -13,8 +14,8 @@ const Redirect: React.FC = () => {
 
             const headers = {
                 headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    Accept: 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 auth: {
                     username: client_id,
@@ -23,7 +24,7 @@ const Redirect: React.FC = () => {
             }
 
             const data = {
-                grant_type: "authorization_code",
+                grant_type: 'authorization_code',
                 code: code,
                 redirect_uri: process.env.GATSBY_REDIRECT_URL,
             }
@@ -43,19 +44,19 @@ const Redirect: React.FC = () => {
             }
 
             const expiryTime = new Date().getTime() + expires_in * 1000
-            window.localStorage.setItem("expiry_time", `${expiryTime}`)
+            window.localStorage.setItem('expiry_time', `${expiryTime}`)
 
-            window.localStorage.setItem("tokens", JSON.stringify(newTokens))
+            window.localStorage.setItem('tokens', JSON.stringify(newTokens))
         }
 
         const returned = getParamValues(window.location.search)
         try {
             tokenRequest(returned.code).then(() => {
-                navigate("/home")
+                navigate('/home')
             })
         } catch (error) {
             console.log(error)
-            navigate("/")
+            navigate('/')
         }
     }, [])
 

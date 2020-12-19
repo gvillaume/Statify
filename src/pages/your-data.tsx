@@ -19,6 +19,7 @@ import {
     Tooltip,
 } from 'recharts'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { window } from 'browser-monads'
 
 import Layout from '../components/shared/layout'
 import ScatterPlot from '../components/shared/scatter-plot'

@@ -21,6 +21,7 @@
     "@emotion/styled": "^11.0.0",
     "@tensorflow/tfjs": "^2.8.0",
     "axios": "^0.21.0",
+    "browser-monads": "^1.0.0",
     "framer-motion": "^2.9.5",
     "gatsby": "^2.26.1",
     "gatsby-plugin-polyfill-io": "^1.1.0",

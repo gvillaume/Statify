@@ -1,5 +1,5 @@
-import React from "react"
-import axios from "axios"
+import React from 'react'
+import { window } from 'browser-monads'
 
 const APIContext = React.createContext({
     canRefresh: false,
@@ -20,8 +20,8 @@ const APIProvider: React.FC<Props> = ({ children }) => {
     const [isValidSession, setIsValid] = React.useState(false)
 
     const updateCanRefresh = () => {
-        if (window.localStorage.getItem("tokens")) {
-            const tokens = JSON.parse(window.localStorage.getItem("tokens"))
+        if (window.localStorage.getItem('tokens')) {
+            const tokens = JSON.parse(window.localStorage.getItem('tokens'))
             setCanRefresh(tokens.refresh_token)
         } else {
             setCanRefresh(false)
@@ -30,7 +30,7 @@ const APIProvider: React.FC<Props> = ({ children }) => {
 
     const checkSession = () => {
         const expiryTime = JSON.parse(
-            window.localStorage.getItem("expiry_time")
+            window.localStorage.getItem('expiry_time')
         )
         setIsValid(expiryTime && Date.now() < expiryTime)
     }

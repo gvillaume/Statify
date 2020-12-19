@@ -1,14 +1,15 @@
-import React from "react"
-import { navigate } from "gatsby"
-import { Center, Flex, Divider, Heading, Text, Button } from "@chakra-ui/react"
+import React from 'react'
+import { navigate } from 'gatsby'
+import { Center, Flex, Divider, Heading, Text, Button } from '@chakra-ui/react'
+import { window } from 'browser-monads'
 
-import Footer from "../components/shared/footer"
-import APIContext from "../utils/api/api-provider"
+import Footer from '../components/shared/footer'
+import APIContext from '../utils/api/api-provider'
 
 const LandingPage: React.FC = () => {
-    const NeuralNetwork = require("../images/statify_icon.svg") as string
+    const NeuralNetwork = require('../images/statify_icon.svg') as string
 
-    const scopes = "user-read-private user-read-email user-top-read"
+    const scopes = 'user-read-private user-read-email user-top-read'
     const handleLogin = () => {
         window.location.href = `${process.env.GATSBY_AUTHORIZE_URL}?client_id=${
             process.env.GATSBY_CLIENT_ID
@@ -21,12 +22,12 @@ const LandingPage: React.FC = () => {
     React.useEffect(() => {
         api.checkSession()
         if (api.isValidSession) {
-            navigate("/home")
+            navigate('/home')
         }
     }, [])
 
     return (
-        <Center style={{ width: "100vw", height: "100vh" }}>
+        <Center style={{ width: '100vw', height: '100vh' }}>
             <Flex
                 align="center"
                 justify="space-around"
@@ -46,7 +47,7 @@ const LandingPage: React.FC = () => {
                         width="70"
                         src={NeuralNetwork}
                         style={{
-                            marginRight: "10px",
+                            marginRight: '10px',
                         }}
                     />
                     <Heading pb={3} color="brand.500">

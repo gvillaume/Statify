@@ -1,5 +1,5 @@
-import React from "react"
-import { Link, navigate } from "gatsby"
+import React from 'react'
+import { Link, navigate } from 'gatsby'
 import {
     Skeleton,
     SkeletonCircle,
@@ -10,15 +10,16 @@ import {
     Divider,
     List,
     ListItem,
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
+import { window } from 'browser-monads'
 
-import SideBarTab from "./side-bar-tab"
-import ProfileInfo from "./profile-info"
-import Footer from "../shared/footer"
-import APIContext from "../../utils/api/api-provider"
+import SideBarTab from './side-bar-tab'
+import ProfileInfo from './profile-info'
+import Footer from '../shared/footer'
+import APIContext from '../../utils/api/api-provider'
 
 const SideBar: React.FC = () => {
-    const NeuralNetwork = require("../../images/statify_icon.svg") as string
+    const NeuralNetwork = require('../../images/statify_icon.svg') as string
     const [isLoading, setLoading] = React.useState(false)
 
     const api = React.useContext(APIContext)
@@ -39,7 +40,7 @@ const SideBar: React.FC = () => {
                             width="48"
                             src={NeuralNetwork}
                             style={{
-                                marginRight: "10px",
+                                marginRight: '10px',
                             }}
                         />
                     </SkeletonCircle>
@@ -71,7 +72,7 @@ const SideBar: React.FC = () => {
                     onClick={() => {
                         window.localStorage.clear()
                         api.checkSession()
-                        navigate("/")
+                        navigate('/')
                     }}
                     colorScheme="brand"
                 >
