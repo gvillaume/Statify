@@ -20,7 +20,7 @@ import {
     ChevronRightIcon,
     ExternalLinkIcon,
 } from '@chakra-ui/icons'
-import ml5 from 'ml5'
+import { window, exists } from 'browser-monads'
 
 import { get } from '../utils/api/functions'
 import Layout from '../components/shared/layout'
@@ -31,6 +31,7 @@ import ResponsiveBlock from '../components/shared/responsive-block'
 const Search: React.FC = () => {
     const navContext = React.useContext(NavigationContext)
     const dataContext = React.useContext(DataContext)
+    let ml5
 
     const [value, setValue] = React.useState('')
     const [results, setResults] = React.useState(
@@ -42,6 +43,9 @@ const Search: React.FC = () => {
     React.useEffect(() => {
         dataContext.updateTracks()
         dataContext.updateTraining()
+        if (exists(window)) {
+            ml5 = require('ml5')
+        }
         navContext.changePage('Search Track')
     }, [])
 
