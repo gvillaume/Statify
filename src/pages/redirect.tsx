@@ -18,8 +18,8 @@ const Redirect: React.FC = () => {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 auth: {
-                    username: client_id,
-                    password: client_secret,
+                    username: client_id!,
+                    password: client_secret!,
                 },
             }
 

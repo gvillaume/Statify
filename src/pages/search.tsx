@@ -21,6 +21,7 @@ import {
     ExternalLinkIcon,
 } from '@chakra-ui/icons'
 import { window, exists } from 'browser-monads'
+import ml5 from 'ml5'
 
 import { get } from '../utils/api/functions'
 import Layout from '../components/shared/layout'
@@ -31,7 +32,6 @@ import ResponsiveBlock from '../components/shared/responsive-block'
 const Search: React.FC = () => {
     const navContext = React.useContext(NavigationContext)
     const dataContext = React.useContext(DataContext)
-    let ml5
 
     const [value, setValue] = React.useState('')
     const [results, setResults] = React.useState(
@@ -41,12 +41,13 @@ const Search: React.FC = () => {
     )
 
     React.useEffect(() => {
-        dataContext.updateTracks()
-        dataContext.updateTraining()
-        if (exists(window)) {
-            ml5 = require('ml5')
+        async function updateData() {
+            dataContext.updateTracks()
+            dataContext.updateTraining()
+            navContext.changePage('Search Track')
         }
-        navContext.changePage('Search Track')
+
+        updateData()
     }, [])
 
     async function handleSearch(search) {
@@ -111,14 +112,14 @@ const Search: React.FC = () => {
         )
 
         const input = {
-            acousticness: await response.acousticness,
-            danceability: await response.danceability,
-            energy: await response.energy,
-            instrumentalness: await response.instrumentalness,
-            liveness: await response.liveness,
-            loudness: await response.loudness,
-            speechiness: await response.speechiness,
-            valence: await response.valence,
+            acousticness: response.acousticness,
+            danceability: response.danceability,
+            energy: response.energy,
+            instrumentalness: response.instrumentalness,
+            liveness: response.liveness,
+            loudness: response.loudness,
+            speechiness: response.speechiness,
+            valence: response.valence,
         }
 
         const options = {

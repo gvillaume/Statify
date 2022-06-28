@@ -6,14 +6,24 @@ const options = {
     task: 'classification',
 }
 
-const DataContext = React.createContext({
+type DataTypes = {
+    topData: any[]
+    topTracks: any[]
+    topAverages: any[]
+    trainingTracks: any[]
+
+    updateTracks: () => Promise<void>
+    updateTraining: () => Promise<void>
+}
+
+const DataContext = React.createContext<DataTypes>({
     topData: [],
     topTracks: [],
     topAverages: [],
     trainingTracks: [],
 
-    updateTracks: () => {},
-    updateTraining: () => {},
+    updateTracks: () => Promise.resolve(),
+    updateTraining: () => Promise.resolve(),
 })
 
 interface Props {
@@ -21,10 +31,10 @@ interface Props {
 }
 
 const DataProvider: React.FC<Props> = ({ children }) => {
-    const [topData, setTopData] = React.useState([])
-    const [topTracks, setTopTracks] = React.useState([])
-    const [topAverages, setAverages] = React.useState([])
-    const [trainingTracks, setTrainingTracks] = React.useState([])
+    const [topData, setTopData] = React.useState<any[]>([])
+    const [topTracks, setTopTracks] = React.useState<any[]>([])
+    const [topAverages, setAverages] = React.useState<any[]>([])
+    const [trainingTracks, setTrainingTracks] = React.useState<any[]>([])
 
     const updateTracks = async () => {
         const trackResponse = await get(
@@ -50,7 +60,7 @@ const DataProvider: React.FC<Props> = ({ children }) => {
             }
         )
 
-        let tracks = []
+        let tracks: any[] = []
         let avgAcoustic = 0
         let avgDance = 0
         let avgEnergy = 0
@@ -129,7 +139,7 @@ const DataProvider: React.FC<Props> = ({ children }) => {
             }
         )
 
-        let tracks = []
+        let tracks: any[] = []
         await featureResponse.audio_features.map((track, idx) => {
             tracks.push({
                 title: response.tracks[idx].name,

@@ -18,6 +18,8 @@ const LandingPage: React.FC = () => {
         }&scope=${encodeURIComponent(scopes)}`
     }
 
+    console.log(process.env.GATSBY_AUTHORIZE_URL)
+
     const api = React.useContext(APIContext)
     React.useEffect(() => {
         api.checkSession()
